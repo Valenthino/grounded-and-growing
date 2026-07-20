@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grounded & Growing — The Life Planner
 
-## Getting Started
+Marketing site for the **Grounded & Growing** undated life planner: a modern,
+motivating single-page experience with a 3D mockup of the printed planner, a
+page-flip preview of the real spreads, and an interactive "digital taste" of
+the planner's method (intention, top 3, habits, self-care check-in).
 
-First, run the development server:
+Built with **Next.js (App Router) · TypeScript · Tailwind CSS v4**.
+Design system — colors, typography, botanical art — is sampled directly from
+the print-ready planner PDF.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Before launch
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Etsy link** — replace `etsyUrl` in [`src/lib/site.ts`](src/lib/site.ts)
+  with the live listing URL (currently a placeholder).
+- **Price** — set the final price in the same file (placeholder `$34.00`).
+- **Domain** — update `url` in `src/lib/site.ts` once the production domain
+  exists (used for Open Graph / SEO metadata).
 
-## Learn More
+## Project map
 
-To learn more about Next.js, take a look at the following resources:
+| Path | What it is |
+| --- | --- |
+| `src/lib/site.ts` | Site-wide config: name, tagline, Etsy URL, price |
+| `src/lib/content.ts` | All copy sourced from the planner (affirmations, quotes, features, FAQ) |
+| `src/components/Hero.tsx` | Hero with CSS-3D planner mockup (`PlannerBook.tsx`) |
+| `src/components/Flipbook.tsx` | Page-flip preview of real planner spreads |
+| `src/components/AppPreview.tsx` | Interactive phone demo (localStorage only) |
+| `public/planner/` | Page renders extracted from the print PDF |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Any Next.js host works; the simplest path is [Vercel](https://vercel.com):
+import the GitHub repo and deploy with default settings.

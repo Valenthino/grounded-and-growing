@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Palette sampled from the printed planner */
+  --color-ink: #211d13;
+  --color-espresso: #3a3019;
+  --color-espresso-deep: #2b2412;
+  --color-olive: #5b5734;
+  --color-olive-deep: #47432a;
+  --color-olive-soft: #7c7550;
+  --color-sand: #d3ccb4;
+  --color-sand-soft: #e6e1cd;
+  --color-beige: #efece2;
+  --color-cream: #f6f3ea;
+  --color-paper: #fcfaf7;
+  --color-rose: #ebdacf;
+  --color-rose-deep: #c89b83;
+  --color-gold: #c0a468;
+  --color-gold-soft: #d9c295;
+  --color-champagne: #efe6d1;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-pt-sans), "PT Sans", system-ui, sans-serif;
+  --font-script: var(--font-caveat), "Caveat", cursive;
+
+  --shadow-book: 0 40px 70px -24px rgb(24 19 6 / 0.6);
+  --shadow-card: 0 20px 45px -22px rgb(58 48 25 / 0.28);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-shadow: float-shadow 7s ease-in-out infinite;
+  --animate-marquee: marquee 48s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
   }
 }
 
+@keyframes float-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleX(0.88);
+    opacity: 0.4;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-olive);
+  color: var(--color-cream);
+}
+
+@layer components {
+  /* Letterspaced uppercase label, mirrors the planner's sub-headers */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+  }
+
+  /* Scroll-reveal (driven by the Reveal component) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Subtle paper grain for large flat sections */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .slider-olive {
+    accent-color: var(--color-olive);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-float,
+  .animate-float-shadow,
+  .animate-marquee {
+    animation: none;
+  }
 }
