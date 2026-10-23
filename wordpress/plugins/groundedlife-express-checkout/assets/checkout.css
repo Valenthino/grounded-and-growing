@@ -1,0 +1,223 @@
+/* Grounded & Growing express checkout — the cart lives on the checkout page.
+   Palette and type follow the chooser/shop surfaces: cream #fffbf3, borders
+   #d9c7a3, ink #4a3220, muted #665b49, olive #596044, Georgia serif headings. */
+
+/* ---------- The editable "Your order" card ---------- */
+.gge-order-card {
+	box-sizing: border-box;
+	background: #fffbf3;
+	border: 1px solid #d9c7a3;
+	border-radius: 10px;
+	padding: 1.25rem 1.25rem 1rem;
+	margin: 0 0 1.75rem;
+	color: #4a3220;
+	font-size: 16px;
+	line-height: 1.5;
+}
+.gge-order-card *,
+.gge-order-card *::before,
+.gge-order-card *::after { box-sizing: border-box; }
+.gge-order-card__title {
+	font-family: Georgia, serif;
+	font-weight: 400;
+	font-size: 1.375rem;
+	line-height: 1.25;
+	color: #4a3220;
+	margin: 0 0 .75rem;
+	padding: 0;
+}
+.gge-order-card__items { list-style: none; margin: 0; padding: 0; }
+.gge-order-card__item {
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr) auto;
+	gap: .875rem;
+	align-items: center;
+	padding: .875rem 0;
+	border-top: 1px solid #eadfc6;
+	margin: 0;
+}
+.gge-order-card__item:first-child { border-top: 0; padding-top: 0; }
+.gge-order-card__thumb img {
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+	border-radius: 6px;
+	background: #f2ece1;
+	display: block;
+	margin: 0;
+}
+.gge-order-card__info { min-width: 0; }
+.gge-order-card__name { display: block; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.gge-order-card__unit { display: block; font-size: .85rem; color: #665b49; margin-top: 2px; }
+.gge-order-card__controls { display: flex; align-items: center; gap: .875rem; margin-top: .5rem; flex-wrap: wrap; }
+.gge-qty {
+	display: inline-flex;
+	align-items: stretch;
+	border: 1px solid #d9c7a3;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #fff;
+}
+.gge-order-card .gge-qty__btn {
+	width: 38px;
+	min-height: 38px;
+	border: 0;
+	border-radius: 0;
+	background: #fff;
+	color: #4a3220;
+	font-size: 1.1rem;
+	font-weight: 600;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+}
+.gge-order-card .gge-qty__btn:hover:not(:disabled) { background: #f2ece1; color: #4a3220; }
+.gge-order-card .gge-qty__btn:focus-visible { outline: 2px solid #4a3220; outline-offset: -2px; }
+.gge-order-card .gge-qty__btn:disabled { opacity: .35; cursor: default; }
+.gge-order-card .gge-qty__input {
+	width: 46px;
+	min-height: 38px;
+	border: 0;
+	border-left: 1px solid #eadfc6;
+	border-right: 1px solid #eadfc6;
+	border-radius: 0;
+	text-align: center;
+	font-size: .95rem;
+	color: #4a3220;
+	background: #fff;
+	padding: 0 2px;
+	margin: 0;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+.gge-order-card .gge-qty__input::-webkit-outer-spin-button,
+.gge-order-card .gge-qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.gge-order-card .gge-remove {
+	border: 0;
+	background: none;
+	color: #8a5a3c;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	cursor: pointer;
+	font-size: .85rem;
+	padding: 0;
+	margin: 0;
+	min-height: 38px;
+}
+.gge-order-card .gge-remove:hover { color: #4a3220; background: none; }
+.gge-order-card__line-total { font-weight: 600; white-space: nowrap; }
+.gge-add-other {
+	display: grid;
+	grid-template-columns: 44px minmax(0, 1fr) auto;
+	gap: .75rem;
+	align-items: center;
+	margin-top: .875rem;
+	padding: .75rem;
+	border: 1px dashed #d9c7a3;
+	border-radius: 8px;
+	background: #fcf7ea;
+}
+.gge-add-other__thumb img {
+	width: 44px;
+	height: 44px;
+	object-fit: cover;
+	border-radius: 4px;
+	background: #f2ece1;
+	display: block;
+	margin: 0;
+}
+.gge-add-other__label { font-size: .875rem; color: #665b49; line-height: 1.4; min-width: 0; }
+.gge-add-other__label b { display: block; color: #4a3220; font-weight: 600; overflow-wrap: anywhere; }
+.gge-order-card .gge-add-other__btn {
+	background: #596044;
+	color: #fffbf3;
+	border: 1px solid #596044;
+	border-radius: 6px;
+	padding: .5rem 1rem;
+	font-size: .9375rem;
+	font-weight: 600;
+	cursor: pointer;
+	min-height: 40px;
+	margin: 0;
+}
+.gge-order-card .gge-add-other__btn:hover { background: #454b34; border-color: #454b34; color: #fffbf3; }
+.gge-order-card__note { margin: .875rem 0 0; padding: 0; font-size: .8125rem; color: #596044; }
+.gge-order-card.gge-busy { opacity: .55; pointer-events: none; }
+
+/* ---------- Checkout layout: info left, payment right ---------- */
+@media (min-width: 981px) {
+	form.woocommerce-checkout #customer_details {
+		float: left;
+		width: 55%;
+	}
+	form.woocommerce-checkout #order_review_heading,
+	form.woocommerce-checkout #order_review {
+		float: right;
+		width: 40%;
+		clear: right;
+	}
+	form.woocommerce-checkout::after { content: ""; display: table; clear: both; }
+}
+
+/* ---------- Totals + payment panel (default review table, items hidden) ---------- */
+.woocommerce-checkout #order_review_heading {
+	font-family: Georgia, serif;
+	font-weight: 400;
+	color: #4a3220;
+}
+.woocommerce-checkout #customer_details h3 {
+	font-family: Georgia, serif;
+	font-weight: 400;
+	color: #4a3220;
+}
+.woocommerce-checkout table.woocommerce-checkout-review-order-table thead { display: none; }
+.woocommerce-checkout table.woocommerce-checkout-review-order-table {
+	border: 1px solid #d9c7a3;
+	border-bottom: 0;
+	border-radius: 10px 10px 0 0;
+	background: #fffbf3;
+	margin-bottom: 0;
+}
+.woocommerce-checkout table.woocommerce-checkout-review-order-table th,
+.woocommerce-checkout table.woocommerce-checkout-review-order-table td {
+	border-color: #eadfc6;
+	color: #4a3220;
+}
+.woocommerce-checkout #payment {
+	background: #fcf7ea;
+	border: 1px solid #d9c7a3;
+	border-top: 0;
+	border-radius: 0 0 10px 10px;
+}
+.woocommerce-checkout #payment div.payment_box {
+	background: #f2ece1;
+	color: #4a3220;
+}
+.woocommerce-checkout #payment div.payment_box::before { border-bottom-color: #f2ece1; }
+.woocommerce-checkout #payment button#place_order {
+	background: #596044;
+	border: 1px solid #596044;
+	color: #fffbf3;
+	border-radius: 6px;
+	padding: 1rem 1.25rem;
+	font-weight: 600;
+	width: 100%;
+	min-height: 52px;
+}
+.woocommerce-checkout #payment button#place_order:hover {
+	background: #454b34;
+	border-color: #454b34;
+	color: #fffbf3;
+}
+
+/* Keep the coupon toggle quiet under the order card. */
+.woocommerce-checkout .woocommerce-form-coupon-toggle .woocommerce-info {
+	background: transparent;
+	border: 0;
+	color: #665b49;
+	padding-left: 0;
+	font-size: .9rem;
+}
+.woocommerce-checkout .woocommerce-form-coupon-toggle .woocommerce-info a { color: #596044; }
+.woocommerce-checkout .woocommerce-form-coupon-toggle .woocommerce-info::before { display: none; }
