@@ -1,0 +1,164 @@
+/* Grounded & Growing express checkout: quantity controls in the block
+   checkout's order summary. Built on WooCommerce's quantity-selector markup,
+   whose component styles only ship with the cart block, and matched to this
+   checkout's own fields: #D3CCB4 borders, 6px radius, #FCFAF7 fill, olive
+   #5B5734 accents. */
+
+/* The theme's custom CSS sets `.woocommerce-checkout h3` to 34px !important
+   (meant for the classic checkout's section titles), which also catches the
+   product names in this summary. Keep the site's serif at a summary scale. */
+.wc-block-components-order-summary .wc-block-components-order-summary-item__description .wc-block-components-product-name {
+	font-size: 21px !important;
+	line-height: 1.3;
+	margin: 0;
+	padding: 0;
+}
+
+/* The line's description is set in the display serif; controls use the
+   site's body face, like the totals rows below them. */
+.wc-block-components-order-summary .gge-qty-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px 18px;
+	margin-top: 10px;
+	font-family: "PT Sans", Arial, sans-serif;
+	transition: opacity 0.15s ease;
+}
+
+.wc-block-components-order-summary .gge-qty-row.is-busy {
+	opacity: 0.55;
+	pointer-events: none;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector {
+	box-sizing: border-box;
+	display: flex;
+	align-items: stretch;
+	height: 36px;
+	min-width: 110px;
+	border: 1px solid #d3ccb4;
+	border-radius: 6px;
+	background: #fcfaf7;
+	color: #211d13;
+	overflow: hidden;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector[hidden] {
+	display: none;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector__button {
+	appearance: none;
+	flex: 0 0 36px;
+	min-width: 36px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	color: inherit;
+	font-family: inherit;
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 1;
+	letter-spacing: 0;
+	text-transform: none;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector__button:hover {
+	opacity: 1;
+	background: #f2ede1;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector__button:focus-visible {
+	opacity: 1;
+	outline: 2px solid #5b5734;
+	outline-offset: -2px;
+}
+
+.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector__button:disabled {
+	opacity: 0.3;
+	background: transparent;
+	cursor: default;
+}
+
+.wc-block-components-order-summary .gge-qty-row input.wc-block-components-quantity-selector__input {
+	appearance: textfield;
+	-moz-appearance: textfield;
+	flex: 1 1 auto;
+	width: 38px;
+	min-width: 0;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	color: inherit;
+	font-family: inherit;
+	/* 16px keeps iOS Safari from zooming the page when the field is focused. */
+	font-size: 16px;
+	line-height: 1;
+	text-align: center;
+}
+
+.wc-block-components-order-summary .gge-qty-row input.wc-block-components-quantity-selector__input:focus {
+	outline: none;
+	box-shadow: inset 0 0 0 1px #5b5734;
+}
+
+.wc-block-components-order-summary .gge-qty-row input.wc-block-components-quantity-selector__input::-webkit-inner-spin-button,
+.wc-block-components-order-summary .gge-qty-row input.wc-block-components-quantity-selector__input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.wc-block-components-order-summary .gge-qty-row .gge-qty-row__remove {
+	appearance: none;
+	margin: 0;
+	padding: 4px 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+	color: #5b5734;
+	font-family: inherit;
+	font-size: 13px;
+	line-height: 1.4;
+	letter-spacing: 0;
+	text-transform: none;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	cursor: pointer;
+}
+
+.wc-block-components-order-summary .gge-qty-row .gge-qty-row__remove:hover {
+	color: #211d13;
+	background: none;
+}
+
+.wc-block-components-order-summary .gge-qty-row .gge-qty-row__remove:focus-visible {
+	outline: 2px solid #5b5734;
+	outline-offset: 2px;
+}
+
+/* Roomier touch targets on phones. */
+@media (max-width: 600px) {
+	.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector {
+		height: 42px;
+		min-width: 126px;
+	}
+
+	.wc-block-components-order-summary .gge-qty-row .wc-block-components-quantity-selector__button {
+		flex-basis: 42px;
+		min-width: 42px;
+	}
+
+	.wc-block-components-order-summary .gge-qty-row .gge-qty-row__remove {
+		padding: 10px 0;
+	}
+}
